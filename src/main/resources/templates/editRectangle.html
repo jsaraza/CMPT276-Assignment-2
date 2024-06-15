@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Rectangle</title>
+    <style>
+      .rectangle {
+        margin-bottom: 20px;
+      }
+    </style>
+    <script>
+      function updateRectangle() {
+        var width = document.getElementById("width").value;
+        var height = document.getElementById("height").value;
+        var color = document.getElementById("color").value;
+
+        var rectangleDiv = document.getElementById("rectangle");
+        rectangleDiv.style.width = width + "px";
+        rectangleDiv.style.height = height + "px";
+        rectangleDiv.style.backgroundColor = color;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Edit Rectangle</h1>
+    <div
+      id="rectangle"
+      class="rectangle"
+      th:style="'width:' + ${rectangle.width} + 'px; height:' + ${rectangle.height} + 'px; background-color:' + ${rectangle.color}"
+    ></div>
+    <form
+      th:action="@{/rectangles/edit/{id}(id=${rectangle.id})}"
+      th:object="${rectangle}"
+      method="post"
+    >
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" />
+      </div>
+      <div>
+        <label for="width">Width:</label>
+        <input
+          type="number"
+          id="width"
+          th:field="*{width}"
+          oninput="updateRectangle()"
+        />
+      </div>
+      <div>
+        <label for="height">Height:</label>
+        <input
+          type="number"
+          id="height"
+          th:field="*{height}"
+          oninput="updateRectangle()"
+        />
+      </div>
+      <div>
+        <label for="color">Color:</label>
+        <input
+          type="color"
+          id="color"
+          th:field="*{color}"
+          oninput="updateRectangle()"
+        />
+      </div>
+      <div>
+        <button type="submit">Update</button>
+      </div>
+    </form>
+    <a href="/rectangles">Back to Rectangles List</a>
+  </body>
+</html>

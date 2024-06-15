@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rectangle List</title>
+  </head>
+  <body>
+    <h1>Rectangles</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Width</th>
+          <th>Height</th>
+          <th>Color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Iterate over the rectangles and display each one in a table row -->
+        <tr th:each="rectangle : ${rectangles}">
+          <td th:text="${rectangle.name}"></td>
+          <td th:text="${rectangle.width}"></td>
+          <td th:text="${rectangle.height}"></td>
+          <td>
+            <div
+              th:style="'background-color:' + ${rectangle.color} + '; width: 50px; height: 20px;'"
+            ></div>
+          </td>
+          <td>
+            <a th:href="@{/rectangles/edit/{id}(id=${rectangle.id})}">Edit</a>
+            <a th:href="@{/rectangles/delete/{id}(id=${rectangle.id})}"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <a href="/rectangles/add">Add New Rectangle</a>
+  </body>
+</html>

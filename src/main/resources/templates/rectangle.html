@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add/Edit Rectangle</title>
+  </head>
+  <body>
+    <h1>Add Rectangle</h1>
+    <form th:action="@{/rectangles/add}" th:object="${rectangle}" method="post">
+      <div>
+        <label>Name:</label>
+        <input type="text" th:field="*{name}" />
+      </div>
+      <div>
+        <label>Width:</label>
+        <input type="number" th:field="*{width}" />
+      </div>
+      <div>
+        <label>Height:</label>
+        <input type="number" th:field="*{height}" />
+      </div>
+      <div>
+        <label for="color">Color:</label>
+        <input type="color" id="color" th:field="*{color}" />
+      </div>
+      <div>
+        <button id="submit" type="submit">Save</button>
+      </div>
+    </form>
+  </body>
+</html>
